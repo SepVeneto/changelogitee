@@ -23,7 +23,7 @@ const defaultConfig: ChangelogOptions = {
 export async function resolveConfig(options: ChangelogOptions) {
   const { loadConfig } = await import('c12')
   const config = await loadConfig<ChangelogOptions>({
-    name: 'changelogithub',
+    name: 'changelogitee',
     defaults: defaultConfig,
     overrides: options,
   }).then(r => r.config || defaultConfig)
