@@ -1,6 +1,6 @@
 export async function getGitHubRepo() {
   const url = await execCommand('git', ['config', '--get', 'remote.origin.url'])
-  const match = url.match(/github\.com[\/:]([\w\d._-]+?)\/([\w\d._-]+?)(\.git)?$/i)
+  const match = url.match(/gitee\.com[\/:]([\w\d._-]+?)\/([\w\d._-]+?)(\.git)?$/i)
   if (!match)
     throw new Error(`Can not parse GitHub repo from url ${url}`)
   return `${match[1]}/${match[2]}`

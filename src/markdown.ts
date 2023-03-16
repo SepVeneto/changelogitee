@@ -16,8 +16,8 @@ function formatReferences(references: Reference[], github: string, type: 'issues
       if (!github)
         return ref.value
       if (ref.type === 'pull-request' || ref.type === 'issue')
-        return `https://github.com/${github}/issues/${ref.value.slice(1)}`
-      return `[<samp>(${ref.value.slice(0, 5)})</samp>](https://github.com/${github}/commit/${ref.value})`
+        return `https://gitee.com/${github}/issues/${ref.value.slice(1)}`
+      return `[<samp>(${ref.value.slice(0, 5)})</samp>](https://gitee.com/${github}/commit/${ref.value})`
     })
 
   const referencesString = join(refs).trim()
@@ -111,9 +111,9 @@ export function generateMarkdown(commits: Commit[], options: ResolvedChangelogOp
   if (!lines.length)
     lines.push('*No significant changes*')
 
-  const url = `https://github.com/${options.github}/compare/${options.from}...${options.to}`
+  // const url = `https://github.com/${options.github}/compare/${options.from}...${options.to}`
 
-  lines.push('', `##### &nbsp;&nbsp;&nbsp;&nbsp;[View changes on GitHub](${url})`)
+  // lines.push('', `##### &nbsp;&nbsp;&nbsp;&nbsp;[View changes on GitHub](${url})`)
 
   return convert(lines.join('\n').trim(), true)
 }
