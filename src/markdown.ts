@@ -17,7 +17,7 @@ function formatReferences(references: Reference[], github: string, type: 'issues
         return ref.value
       if (ref.type === 'pull-request' || ref.type === 'issue')
         return `https://gitee.com/${github}/issues/${ref.value.slice(1)}`
-      return `[<samp>(${ref.value.slice(0, 5)})</samp>](https://gitee.com/${github}/commit/${ref.value})`
+      return `[(${ref.value.slice(0, 5)})](https://gitee.com/${github}/commit/${ref.value})`
     })
 
   const referencesString = join(refs).trim()
