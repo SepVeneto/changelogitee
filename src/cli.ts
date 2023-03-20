@@ -2,7 +2,7 @@
 import { blue, bold, cyan, dim, red, yellow } from 'kolorist'
 import cac from 'cac'
 import { version } from '../package.json'
-import { generate, hasTagOnGitHub, isRepoShallow, sendRelease } from './index'
+import { generate, isRepoShallow, sendRelease } from './index'
 
 const cli = cac('changelogitee')
 
@@ -44,12 +44,6 @@ cli
 
       if (config.dry) {
         console.log(yellow('Dry run. Release skipped.'))
-        return
-      }
-
-      if (!await hasTagOnGitHub(config.to, config)) {
-        console.error(yellow(`Current ref "${bold(config.to)}" is not available as tags on GitHub. Release skipped.`))
-        process.exitCode = 1
         return
       }
 
