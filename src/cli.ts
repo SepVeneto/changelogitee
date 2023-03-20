@@ -47,12 +47,6 @@ cli
         return
       }
 
-      if (!config.token) {
-        console.error(red('No GitHub token found, specify it via GITHUB_TOKEN env. Release skipped.'))
-        process.exitCode = 1
-        return
-      }
-
       if (!await hasTagOnGitHub(config.to, config)) {
         console.error(yellow(`Current ref "${bold(config.to)}" is not available as tags on GitHub. Release skipped.`))
         process.exitCode = 1
