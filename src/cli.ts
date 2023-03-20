@@ -4,14 +4,15 @@ import cac from 'cac'
 import { version } from '../package.json'
 import { generate, hasTagOnGitHub, isRepoShallow, sendRelease } from './index'
 
-const cli = cac('changelogithub')
+const cli = cac('changelogitee')
 
 cli
   .version(version)
-  .option('-t, --token <path>', 'GitHub Token')
+  .option('-n, --notify <url>', 'webhook notification')
+  .option('-t, --token <path>', 'Gitee Token')
   .option('--from <ref>', 'From tag')
   .option('--to <ref>', 'To tag')
-  .option('--github <path>', 'GitHub Repository, e.g. antfu/changelogithub')
+  // .option('--github <path>', 'GitHub Repository, e.g. antfu/changelogithub')
   .option('--name <name>', 'Name of the release')
   .option('--contributors', 'Show contributors section')
   .option('--prerelease', 'Mark release as prerelease')
@@ -26,6 +27,7 @@ cli
   .command('')
   .action(async (args) => {
     args.token = args.token || process.env.GITHUB_TOKEN
+    args.notify = args.notify || process.env.UNI_CLI_DEPLOY_NOTIFY
 
     try {
       console.log()
@@ -39,8 +41,6 @@ cli
       console.log(md.replace(/\&nbsp;/g, ''))
       console.log()
       console.log(dim('--------------'))
-
-      process.env.CHANGE_LOG = md
 
       if (config.dry) {
         console.log(yellow('Dry run. Release skipped.'))
@@ -59,7 +59,7 @@ cli
         return
       }
 
-      await sendRelease(config, md)
+      await sendRelease(config, md, args.notify)
 
       if (!commits.length && await isRepoShallow()) {
         console.error(yellow('The repo seems to be clone shallowly, which make changelog failed to generate. You might want to specify `fetch-depth: 0` in your CI config.'))

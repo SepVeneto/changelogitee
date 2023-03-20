@@ -7,32 +7,23 @@ import type { AuthorInfo, ChangelogOptions, Commit } from './types'
 export async function sendRelease(
   options: ChangelogOptions,
   content: string,
+  notify: string,
 ) {
-  const headers = getHeaders(options)
-  let url = `https://api.github.com/repos/${options.github}/releases`
-  let method = 'POST'
-  try {
-    const exists = await $fetch(`https://api.github.com/repos/${options.github}/releases/tags/${options.to}`, {
-      headers,
-    })
-    if (exists.url) {
-      url = exists.url
-      method = 'PATCH'
-    }
+  // const headers = getHeaders(options)
+  const headers = {
+    'Content-Type': 'application/json',
   }
-  catch (e) {
-  }
+  const method = 'POST'
 
   const body = {
-    body: content,
-    draft: options.draft || false,
-    name: options.name || options.to,
-    prerelease: options.prerelease,
-    tag_name: options.to,
+    msgtype: 'markdown',
+    markdown: {
+      content,
+    },
   }
 
   console.log(cyan(method === 'POST' ? 'Creating release notes...' : 'Updating release notes...'))
-  const res = await $fetch(url, {
+  const res = await $fetch(notify, {
     method,
     body: JSON.stringify(body),
     headers,
