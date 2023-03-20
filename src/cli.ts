@@ -40,6 +40,8 @@ cli
       console.log()
       console.log(dim('--------------'))
 
+      process.env.CHANGE_LOG = md
+
       if (config.dry) {
         console.log(yellow('Dry run. Release skipped.'))
         return
