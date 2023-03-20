@@ -47,7 +47,7 @@ cli
         return
       }
 
-      await sendRelease(config, md, args.notify)
+      await sendRelease(config, md.replace(/\&nbsp;/g, ''), args.notify)
 
       if (!commits.length && await isRepoShallow()) {
         console.error(yellow('The repo seems to be clone shallowly, which make changelog failed to generate. You might want to specify `fetch-depth: 0` in your CI config.'))
