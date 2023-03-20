@@ -31,3 +31,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      
+      - name: Sync npmmirror
+        run: sepveneto/sync-npmmirror-action@v1
