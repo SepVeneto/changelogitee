@@ -1,7 +1,7 @@
 {
   "name": "@sepveneto/changelogitee",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "packageManager": "pnpm@7.2.0",
   "description": "Generate changelog for Gitee.",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
@@ -44,7 +44,6 @@
     "dev": "unbuild --stub",
     "test": "vitest",
     "lint": "eslint .",
-    "prepublishOnly": "nr build",
     "release": "bumpp --commit --push --tag",
     "start": "nr dev && node cli.mjs",
     "typecheck": "tsc --noEmit"
