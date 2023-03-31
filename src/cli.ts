@@ -31,7 +31,7 @@ cli
 
     try {
       console.log()
-      console.log(dim(`changelo${bold('github')} `) + dim(`v${version}`))
+      console.log(dim(`changelo${bold('gitee')} `) + dim(`v${version}`))
 
       const { config, md, commits } = await generate(args as any)
 
