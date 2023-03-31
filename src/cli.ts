@@ -27,7 +27,6 @@ cli
   .command('')
   .action(async (args) => {
     args.token = args.token || process.env.GITHUB_TOKEN
-    args.notify = args.notify || process.env.UNI_CLI_DEPLOY_NOTIFY
 
     try {
       console.log()
