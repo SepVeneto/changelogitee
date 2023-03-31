@@ -28,7 +28,9 @@ export async function resolveConfig(options: ChangelogOptions) {
     overrides: options,
   }).then(r => r.config || defaultConfig)
 
-  config.from = config.from || await getLastGitTag()
+  // hack: 流水线上取不到上一次提交的commitId时，from会为true
+  const _form = (config.from as unknown) === true ? undefined : config.from
+  config.from = _form || await getLastGitTag()
   config.to = config.to || await getCurrentGitBranch()
   config.github = config.github || await getGitHubRepo()
   config.prerelease = config.prerelease ?? isPrerelease(config.to)

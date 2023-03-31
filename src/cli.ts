@@ -10,7 +10,7 @@ cli
   .version(version)
   .option('-n, --notify <url>', 'webhook notification')
   .option('-t, --token <path>', 'Gitee Token')
-  .option('--from [ref]', 'From tag, default is the latest tag', { default: undefined })
+  .option('--from [ref]', 'From tag, default is the latest tag')
   .option('--to <ref>', 'To tag')
   // .option('--github <path>', 'GitHub Repository, e.g. antfu/changelogithub')
   .option('--name <name>', 'Name of the release')
