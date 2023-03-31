@@ -1,7 +1,7 @@
 {
   "name": "@sepveneto/changelogitee",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "packageManager": "pnpm@7.2.0",
   "description": "Generate changelog for Gitee.",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
