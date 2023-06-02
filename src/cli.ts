@@ -3,7 +3,7 @@ import fs from 'node:fs/promises'
 import { blue, bold, cyan, dim, red, yellow } from 'kolorist'
 import cac from 'cac'
 import { version } from '../package.json'
-import { generate, isRepoShallow, sendRelease } from './index'
+import { generate, hasTagOnGitHub, isRepoShallow, sendRelease } from './index'
 
 const cli = cac('changelogitee')
 
@@ -29,6 +29,7 @@ cli
   .command('')
   .action(async (args) => {
     args.token = args.token || process.env.GITHUB_TOKEN
+    args.notify = args.notify || process.env.UNI_CLI_DEPLOY_NOTIFY
 
     try {
       console.log()
@@ -72,7 +73,7 @@ cli
         return
       }
 
-      await sendRelease(config, md)
+      await sendRelease(config, md, args.notify)
     }
     catch (e: any) {
       console.error(red(String(e)))

@@ -1,10 +1,10 @@
 {
   "name": "@sepveneto/changelogitee",
   "type": "module",
-  "version": "0.12.7",
+  "version": "0.5.0",
   "packageManager": "pnpm@8.5.1",
   "description": "Generate changelog for Gitee.",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "author": "SepVeneto <sepveneto@qq.com>",
   "license": "MIT",
   "homepage": "https://github.com/sepveneto/changelogithub#readme",
   "repository": {

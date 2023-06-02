@@ -9,18 +9,8 @@ export async function sendRelease(
   content: string,
   notify: string,
 ) {
-  const headers = getHeaders(options)
-  let url = `https://api.github.com/repos/${options.github}/releases`
-  let method = 'POST'
-
-  try {
-    const exists = await $fetch(`https://api.github.com/repos/${options.github}/releases/tags/${options.to}`, {
-      headers,
-    })
-    if (exists.url) {
-      url = exists.url
-      method = 'PATCH'
-    }
+  const headers = {
+    'Content-Type': 'application/json',
   }
   const method = 'POST'
 
@@ -31,11 +21,9 @@ export async function sendRelease(
     },
   }
 
-  const webUrl = `https://github.com/${options.github}/releases/new?title=${encodeURIComponent(String(body.name))}&body=${encodeURIComponent(String(body.body))}&tag=${encodeURIComponent(String(options.to))}&prerelease=${options.prerelease}`
-
   try {
     console.log(cyan(method === 'POST' ? 'Creating release notes...' : 'Updating release notes...'))
-    const res = await $fetch(url, {
+    const res = await $fetch(notify, {
       method,
       body: JSON.stringify(body),
       headers,
@@ -45,7 +33,7 @@ export async function sendRelease(
   catch (e) {
     console.log()
     console.error(red('Failed to create the release. Using the following link to create it manually:'))
-    console.error(yellow(webUrl))
+    console.error(yellow(notify))
     console.log()
 
     throw e
